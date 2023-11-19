@@ -47,7 +47,7 @@ app.post("/register", async (request,response) => {
         user(username, name, password, gender, location)
         VALUES( '${username}',
         '${name}',
-        '${password}',
+        '${ hashedPassword}',
         '${gender}',
         '${location}');`;
 
@@ -102,7 +102,7 @@ app.put("/change-password", async (request, response)=>{
                 const updatePasswordQuery = `
                 UPDATE user 
                 SET 
-                password = '${password}';`;
+                password = '${hashedPassword}';`;
             const user = await db.run(updatePasswordQuery);
             response.send("Password updated");
             }else{
